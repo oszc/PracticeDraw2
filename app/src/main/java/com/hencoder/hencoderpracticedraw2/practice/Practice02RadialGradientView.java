@@ -1,14 +1,15 @@
 package com.hencoder.hencoderpracticedraw2.practice;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Paint;
+import android.graphics.*;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
 public class Practice02RadialGradientView extends View {
     Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    RadialGradient radialGradient = new RadialGradient(300,300,200, Color.parseColor("#e91e63"),
+            Color.parseColor("#2196f3"), Shader.TileMode.CLAMP);
 
     public Practice02RadialGradientView(Context context) {
         super(context);
@@ -31,6 +32,7 @@ public class Practice02RadialGradientView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        paint.setShader(radialGradient);
         canvas.drawCircle(300, 300, 200, paint);
     }
 }

@@ -1,14 +1,15 @@
 package com.hencoder.hencoderpracticedraw2.practice;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Paint;
+import android.graphics.*;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.View;
+import com.hencoder.hencoderpracticedraw2.R;
 
-public class Practice04BitmapShaderView extends View {
+public class Practice04BitmapShaderView extends PracticeView{
     Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    BitmapShader mBmpShader;
+    Bitmap mBitmap = null;
 
     public Practice04BitmapShaderView(Context context) {
         super(context);
@@ -22,6 +23,15 @@ public class Practice04BitmapShaderView extends View {
         super(context, attrs, defStyleAttr);
     }
 
+    @Override
+    protected void init(Context context, AttributeSet attrs, int defStyleAttr) {
+
+        mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.batman);
+        mBmpShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+
+
+    }
+
     {
         // 用 Paint.setShader(shader) 设置一个 BitmapShader
         // Bitmap: R.drawable.batman
@@ -31,6 +41,7 @@ public class Practice04BitmapShaderView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        paint.setShader(mBmpShader);
         canvas.drawCircle(200, 200, 200, paint);
     }
 }
